@@ -26,7 +26,46 @@
                     <arguments>
                     </arguments>
                 </configuration>
-            </plugin>
+	</plugin>
+	<plugin>
+	<groupId>com.heroku.sdk</groupId>
+	<artifactId>heroku-maven-plugin</artifactId>
+	<version>2.0.3</version>
+	<configuration>
+          <jdkVersion>1.8</jdkVersion>
+          <!-- Use your own application name -->
+	  <!-- at Heroku CLI, use heroku apps to list, or use Heroku Dashboard -->
+          <appName>cs56-m18-joanne1i-lab04a</appName>
+          <processTypes>
+            <!-- Tell Heroku how to launch your application -->
+            <!-- You might have to remove the ./ in front   -->
+	    <web>java $JAVA_OPTS -jar target/spark-basic-structure-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
+
+          </processTypes>
+	</configuration>
+</plugin>
+<plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-assembly-plugin</artifactId>
+	      <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <archive>
+                <manifest>
+			<mainClass>app.Application</mainClass>
+                </manifest>
+              </archive>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+          </execution>
+	       </executions>
+      </plugin>
         </plugins>
     </build>
 
